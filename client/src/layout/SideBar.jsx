@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import logo_with_title from "../assets/logo-with-title.png";
 import logoutIcon from "../assets/logout.png";
 import closeIcon from "../assets/white-close-icon.png";
@@ -8,10 +8,15 @@ import catalogIcon from "../assets/catalog.png";
 import settingIcon from "../assets/setting-white.png";
 import usersIcon from "../assets/people.png";
 import { RiAdminFill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAddNewAdminPopup, toggleAddBookPopup, toggleReadBookPopup, toggleRecordBookPopup, toggleReturnBookPopup, toggleSettingPopup } from "../store/slices/popUpSlice";
+import { logout, resetAuthSlice } from "../store/slices/authSlice";
+import AddNewAdmin from "../popups/AddNewAdmin";
+import { toast } from "react-toastify";
 
 const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
   const dispatch = useDispatch();
-  const { addNewAdminPopup } = useSelector((state) => state.popup);
+  const { addNewAdminPopup } = useSelector(state => state.popup);
 
   const { loading, error, message, isAuthenticated, user } = useSelector(
     (state) => state.auth
@@ -56,7 +61,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
           >
             <img src={bookIcon} alt="books" /> <span>Books</span>
           </button>
-          {isAuthenticated && user?.role === "Admin" && (
+          {/* {isAuthenticated && user?.role === "Admin" && ( */}
             <>
               <button
                 onClick={() => setSelectedComponent("Catalog")}
@@ -77,7 +82,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
                 <RiAdminFill className="w-6 h-6" /> <span>Add New Admin</span>
               </button>
             </>
-          )}
+          {/* )} */}
           {isAuthenticated && user?.role === "User" && (
             <button
               onClick={() => setSelectedComponent("My Borrowed Books")}
