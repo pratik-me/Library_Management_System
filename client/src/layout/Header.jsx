@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import settingIcon from "../assets/setting.png";
 import userIcon from "../assets/user.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ const Header = () => {
       const hours = now.getHours() % 12 || 12;
       const minutes = now.getMinutes().toString().padStart(2, "0");
       const ampm = now.getHours() >= 12 ? "PM" : "AM";
-      setCurrentTime(`${hours}:${minutes}:${ampm}`);
+      setCurrentTime(`${hours}:${minutes} ${ampm}`);
 
       const options = {month: "short", dat: "numeric", year: "numeric"};
       setCurrentDate(now.toLocaleDateString("en-US", options));

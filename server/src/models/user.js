@@ -76,8 +76,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue : false,
     },
     borrowedBooks: {
-      type : DataTypes.JSON,
-    },
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: [],
+  },
     verificationCode: DataTypes.INTEGER,
     verificationCodeExpires: DataTypes.DATE,
     resetPasswordToken: DataTypes.STRING,

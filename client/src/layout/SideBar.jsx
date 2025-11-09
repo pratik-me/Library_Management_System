@@ -12,11 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleAddNewAdminPopup, toggleAddBookPopup, toggleReadBookPopup, toggleRecordBookPopup, toggleReturnBookPopup, toggleSettingPopup } from "../store/slices/popUpSlice";
 import { logout, resetAuthSlice } from "../store/slices/authSlice";
 import AddNewAdmin from "../popups/AddNewAdmin";
+import SettingPopup from "../popups/SettingPopup";
 import { toast } from "react-toastify";
 
 const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
   const dispatch = useDispatch();
-  const { addNewAdminPopup } = useSelector(state => state.popup);
+  const { addNewAdminPopup, settingPopup } = useSelector(state => state.popup);
 
   const { loading, error, message, isAuthenticated, user } = useSelector(
     (state) => state.auth
@@ -61,7 +62,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
           >
             <img src={bookIcon} alt="books" /> <span>Books</span>
           </button>
-          {/* {isAuthenticated && user?.role === "Admin" && ( */}
+          {isAuthenticated && user?.role === "Admin" && (
             <>
               <button
                 onClick={() => setSelectedComponent("Catalog")}
@@ -82,7 +83,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
                 <RiAdminFill className="w-6 h-6" /> <span>Add New Admin</span>
               </button>
             </>
-          {/* )} */}
+          )}
           {isAuthenticated && user?.role === "User" && (
             <button
               onClick={() => setSelectedComponent("My Borrowed Books")}
@@ -116,6 +117,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
         />
       </aside>
       {addNewAdminPopup && <AddNewAdmin />}
+      {settingPopup && <SettingPopup />}
     </>
   );
 };

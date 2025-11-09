@@ -99,7 +99,7 @@ const authSlice = createSlice({
             state.loading = false;
             state.message = action.payload;
         },
-        forgotPasswordFailed(state) {
+        forgotPasswordFailed(state, action) {
             state.loading = false;
             state.error = action.payload;
         },
@@ -115,7 +115,7 @@ const authSlice = createSlice({
             state.user = action.payload.user;
             state.isAuthenticated = true;
         },
-        resetPasswordFailed(state) {
+        resetPasswordFailed(state, action) {
             state.loading = false;
             state.error = action.payload;
         },
@@ -203,15 +203,12 @@ export const logout = () => async (dispatch) => {
     })
 }
 
-export const getUser = (data) => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
     dispatch(authSlice.actions.getUserRequest());
-    await axios.post("localhost:4000/api/v1/auth/me", data, {
+    await axios.get("http://localhost:4000/api/v1/auth/me", {
         withCredentials : true,
-        headers : {
-            "Content-Type" : "application/json",
-        },
     }).then((res) => {
-        dispatch(authSlice.actions.getUserSuccess(res.data));
+        dispatch(authSlice.actions.getUserSuccess(res.data))
     }).catch((error) => {
         dispatch(authSlice.actions.getUserFailed(error.response.data.message));
     })
@@ -219,7 +216,7 @@ export const getUser = (data) => async (dispatch) => {
 
 export const forgotPassword = (email) => async (dispatch) => {
     dispatch(authSlice.actions.forgotPasswordRequest());
-    await axios.post("localhost:4000/api/v1/auth/password/forgot", {email}, {
+    await axios.post("http://localhost:4000/api/v1/auth/password/forgot", {email}, {
         withCredentials : true,
         headers : {
             "Content-Type" : "application/json",
@@ -233,7 +230,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
 export const resetPassword = (data, token) => async (dispatch) => {
     dispatch(authSlice.actions.resetPasswordRequest());
-    await axios.put(`localhost:4000/api/v1/auth/password/reset/${token}`, data, {
+    await axios.put(`http://localhost:4000/api/v1/auth/password/reset/${token}`, data, {
         withCredentials : true,
         headers : {
             "Content-Type" : "application/json",
@@ -247,7 +244,7 @@ export const resetPassword = (data, token) => async (dispatch) => {
 
 export const updatePassword = (data) => async (dispatch) => {
     dispatch(authSlice.actions.updatePasswordRequest());
-    await axios.put(`localhost:4000/api/v1/auth/password/update`, data, {
+    await axios.put(`http://localhost:4000/api/v1/auth/password/update`, data, {
         withCredentials : true,
         headers : {
             "Content-Type" : "application/json",

@@ -29,7 +29,9 @@ const Register = () => {
 
   useEffect(() => {
     if(message) {
-      navigateTo(`/otp-verifcation/${email}`)
+      toast.success(message);
+      dispatch(resetAuthSlice());
+      navigateTo(`/otp-verification/${email}`)
     }
     if(error) {
       toast.error(error);
@@ -40,6 +42,7 @@ const Register = () => {
   if(isAuthenticated) {
     return <Navigate to={"/"}/> ;
   }
+
   return (
     <>
       <div className="flex flex-col justify-center md:flex-row h-screen">
