@@ -38,6 +38,7 @@ export const recordBorrowedBook = catchAsyncErrors(async (req, res, next) => {
         returned : false,
     });
     user.borrowedBooks = borrowedBooks;
+    user.changed('borrowedBooks', true);
     await user.save();
 
     await Borrow.create({
@@ -73,8 +74,10 @@ export const returnBorrowBook = catchAsyncErrors(async (req, res, next) => {
     const isAlreadyBorrowed = borrowedBook.find(
         (b) => String(b.bookId) === String(bookId) && b.returned === false
     );
-    if(!isAlreadyBorrowed) return next(new ErrorHandler("You have not borrowed this book.", 400));
-    borrowedBook.returned = true;
+    if(!isAlreadyBorrowed)
+        return next(new ErrorHandler("You have not borrowed this book.", 400));
+    isAlreadyBorrowed.returned = true;
+    user.changed('borrowedBooks', true);
     await user.save();
 
     book.quantity += 1;

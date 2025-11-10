@@ -11,6 +11,6 @@ export const store = configureStore({
         popup : popupReducer,
         user : userReducer,
         book : bookReducer,
-        borrow : bookReducer,
+        borrow : borrowReducer,
     },
 });

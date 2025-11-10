@@ -12,7 +12,7 @@ import Users from "../components/Users";
 
 const Home = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [selectedComponenet, setSelectedComponenet] = useState("");
+  const [selectedComponent, setSelectedComponent] = useState("");
 
   const {user, isAuthenticated} = useSelector(state => state.auth);
 
@@ -26,12 +26,12 @@ const Home = () => {
         <div className="md:hidden z-10 absolute right-6 top-4 sm:top-6 flex justify-center bg-black rounded-md h-9 w-9 text-white">
           <GiHamburgerMenu className="text 2xl" onClick={() => setIsSideBarOpen(!isSideBarOpen)}/>
         </div>
-        <Sidebar isSideBarOpen={isSideBarOpen} setIsSideBarOpen={setIsSideBarOpen} setSelectedComponent={setSelectedComponenet}/>
+        <Sidebar isSideBarOpen={isSideBarOpen} setIsSideBarOpen={setIsSideBarOpen} setSelectedComponent={setSelectedComponent}/>
 
         {
           (
             () => {
-              switch (selectedComponenet) {
+              switch (selectedComponent) {
                 case "Dashboard":
                   return user?.role === "User" ? (
                     <UserDashboard />
@@ -49,7 +49,7 @@ const Home = () => {
                   if(user.role === "Admin") return <Users />
                   break;
                   case "My Borrowed Books" :
-                    if(user.role === "Admin") return <MyborrowedBooks />
+                    if(user.role === "User") return <MyborrowedBooks />
                     break;
                 default :
                   return user?.role === "User" ? (

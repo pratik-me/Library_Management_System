@@ -28,7 +28,7 @@ const BookManagement = () => {
   const [borrowBookId, setBorrowBookId] = useState("");
   const openRecordBookPopup = (bookId) => {
     setBorrowBookId(bookId);
-    dispatch(toggleRecordBookPopup);
+    dispatch(toggleRecordBookPopup());
   }
 
   useEffect(() => {
@@ -132,12 +132,12 @@ const BookManagement = () => {
               </table>
             </div>
           ) : (
-            <h3 className="text-3xl mt-5 font-medium">No books found in Library</h3>
+            <h3 className="text-3xl mt-5 font-medium">No books found in Library!</h3>
           )
         }
       </main>
       { addBookPopup && <AddBookPopup /> }
-      { readBookPopup && <ReadBookPopup /> }
+      { readBookPopup && <ReadBookPopup book={readbook}/> }
       { recordBookPopup && <RecordBookPopup bookId={borrowBookId}/> }
     </>
   )

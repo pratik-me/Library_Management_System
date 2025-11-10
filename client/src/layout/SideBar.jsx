@@ -89,15 +89,16 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
               onClick={() => setSelectedComponent("My Borrowed Books")}
               className="w-full py-2 font-medium bg-transparent rounded-md hover:cursor-pointer flex items-center space-x-2"
             >
-              <img src={catalogIcon} alt="my-borrowed-books" />{" "}
-              <span>My Borrowed Books</span>
+              <img src={catalogIcon} alt="my-borrowed-books" />
+              <span>Borrowed Books</span>
             </button>
           )}
+
           <button
             onClick={() => dispatch(toggleSettingPopup())}
             className="md:hidden w-full py-2 font-medium bg-transparent rounded-md hover:cursor-pointer flex items-center space-x-2"
           >
-            <img src={settingIcon} alt="setting" />{" "}
+            <img src={settingIcon} alt="setting" />
             <span>Update Credentials</span>
           </button>
         </nav>
