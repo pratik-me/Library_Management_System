@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { recordBorrowBooks } from "../store/slices/borrowSlice";
 import { toggleRecordBookPopup } from "../store/slices/popUpSlice";
 
-const RecordBookPopup = () => {
+const RecordBookPopup = ({bookId}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
 

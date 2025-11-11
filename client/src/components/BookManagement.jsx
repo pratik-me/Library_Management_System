@@ -20,9 +20,9 @@ const BookManagement = () => {
 
   const [readbook, setReadbook] = useState({});
   const openReadPopup = (id) => {
-    const book = book.find((book) => book.id === id);
+    const book = books.find((book) => book.id === id);
     setReadbook(book);
-    dispatch(toggleReadBookPopup);
+    dispatch(toggleReadBookPopup());
   };
 
   const [borrowBookId, setBorrowBookId] = useState("");
@@ -48,7 +48,7 @@ const BookManagement = () => {
 
     const [searchedKeyword, setSearchedKeyword] = useState("");
     const handleSearch = (e) => {
-      setSearchedKeyword(e.target.value.toLowercase());
+      setSearchedKeyword(e.target.value.toLowerCase());
     }
 
     const searchedBooks = books.filter((book) => 

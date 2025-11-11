@@ -53,6 +53,7 @@ const borrowSlice = createSlice({
         fetchAllborrowedBooksFailed(state, action) {
             state.loading = false;
             state.error = action.payload;
+            state.message = null;
         },
 
         returnBookRequest(state) {
@@ -74,7 +75,7 @@ const borrowSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.message = null;
-        }
+        },
     }
 });
 
@@ -89,9 +90,9 @@ export const fetchUserBorrowedBooks = () => async (dispatch) => {
 
 export const fetchAllBorrowedBooks = () => async (dispatch) => {
     dispatch(borrowSlice.actions.fetchAllborrowedBooksRequest());
-    await axios.get("http://localhost:4000/api/v1/borrow/borrowed-books-by-users", {withCredentials : true}).then(res => {
+    await axios.get("http://localhost:4000/api/v1/borrow/borrow-books-by-users", {withCredentials : true}).then((res) => {
         dispatch(borrowSlice.actions.fetchAllborrowedBooksSuccess(res.data.borrowedBooks));
-    }).catch(err => {
+    }).catch((err) => {
         dispatch(borrowSlice.actions.fetchAllborrowedBooksFailed(err.response.data.message));
     })
 }
