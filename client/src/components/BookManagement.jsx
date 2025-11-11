@@ -34,15 +34,15 @@ const BookManagement = () => {
   useEffect(() => {
     if(message || borrowSliceMessage) {
       toast.success(message || borrowSliceMessage);
-      dispatch(fetchAllBooks);
-      dispatch(fetchAllBorrowedBooks);
-      dispatch(resetBorrowSlice);
+      dispatch(fetchAllBooks());
+      dispatch(fetchAllBorrowedBooks());
+      dispatch(resetBorrowSlice());
     }
 
     if(error || borrowSliceError) {
       toast.error(error || borrowSliceError);
-      dispatch(resetBookSlice);
-      dispatch(resetBorrowSlice);
+      dispatch(resetBookSlice());
+      dispatch(resetBorrowSlice());
     }
     }, [dispatch, message, error, loading, borrowSliceError, borrowSliceLoading, borrowSliceMessage])
 
@@ -115,13 +115,13 @@ const BookManagement = () => {
                             <td className="px-4 py-2">{book.quantity}</td>
                           )
                         }
-                        <td className="px-4 py-2">{book.price}</td>
+                        <td className="px-4 py-2">&#8377;{book.price}</td>
                         <td className="px-4 py-2">{book.availability ? "Available" : "Unavailable"}</td>
                         {
                           isAuthenticated && user?.role === "Admin" && (
                             <td className="px-4 py-2 flex space-x-2 my-3 justify-center">
                               <BookA onClick={() => openReadPopup(book.id)}/>
-                                <NotebookPen onClick={() => openRecordBookPopup(book.id)}/>
+                              <NotebookPen onClick={() => openRecordBookPopup(book.id)}/>
                             </td>
                           )
                         }

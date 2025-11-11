@@ -22,8 +22,9 @@ export const recordBorrowedBook = catchAsyncErrors(async (req, res, next) => {
     if(book.quantity === 0) return next(new ErrorHandler("Book not available.", 400));
 
     const borrowedBooks = user.borrowedBooks || [];
+    console.log(borrowedBooks);
     const isAlreadyBorrowed = borrowedBooks.find(
-        (b) => String(b.id) === String(id) && b.returned === false
+        (b) => String(b.bookId) === String(id) && b.returned === false
     );
     if(isAlreadyBorrowed) return next(new ErrorHandler("Book already borrowed.", 400));
     book.quantity -= 1;

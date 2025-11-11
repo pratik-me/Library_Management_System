@@ -16,9 +16,10 @@ import {
   ArcElement,
 } from "chart.js";
 import logo from "../assets/black-logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../layout/Header";
 import placeHolder from "../assets/placeholder.jpg";
+import { fetchAllUsers } from "../store/slices/userSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -33,6 +34,8 @@ ChartJS.register(
 );
 
 const AdminDashboard = () => {
+  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.user);
   const { books } = useSelector((state) => state.book);
@@ -46,6 +49,8 @@ const AdminDashboard = () => {
   const [totalReturnedBooks, setTotalReturnedBooks] = useState(0);
 
   useEffect(() => {
+    dispatch(fetchAllUsers());
+
     let numberOfUsers = users.filter((user) => user.role === "User");
     let numberOfAdmins = users.filter((user) => user.role === "Admin");
     setTotalUsers(numberOfUsers.length);
@@ -59,7 +64,7 @@ const AdminDashboard = () => {
     );
     setTotalBorrowedBooks(numberOfTotalBorrowedBooks.length);
     setTotalReturnedBooks(numberOfTotalReturnedBooks.length);
-  }, [users, allBorrowedBooks]);
+  }, [dispatch, users, allBorrowedBooks]);
 
   const data = {
     labels: ["Total Borrowed Books", "Total Returned Books"],

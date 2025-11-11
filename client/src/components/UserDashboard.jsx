@@ -70,7 +70,7 @@ const UserDashboard = () => {
           {/* LEFT SIDE */}
           <div className="flex flex-[4] flex-col gap-7 lg:gap-7 lg:py-5 justify-between xl:min-h-[85.5vh]">
             <div className="flex flex-col gap-7 flex-[4]">
-              <div className="flex flex-col lg:flow-row gap-7 overflow-y-hidden">
+              <div className="flex flex-col lg:flex-row gap-7 overflow-y-hidden">
                 <div className="flex items-center gap-3 bg-white p-5 min-h-[120px] overflow-y-hidden rounded-lg transition hover:shadow-inner duration-300 ">
                   <span className="w-[2px] bg-black h-20 lg:h-full"></span>
                   <span className="bg-gray-300 h-20 lg:h-full min-w-20 flex justify-center items-center rounded-lg">

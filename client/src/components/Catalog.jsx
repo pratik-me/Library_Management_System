@@ -19,6 +19,7 @@ const Catalog = () => {
   const { loading, error, allBorrowedBooks, message } = useSelector(
     (state) => state.borrow
   );
+  const {books} = useSelector(state => state.book);
 
   const [filter, setFilter] = useState("borrowed");
 
@@ -131,7 +132,7 @@ const Catalog = () => {
                     <td className="px-4 py-2">{index + 1}</td>
                     <td className="px-4 py-2">{book?.user.name}</td>
                     <td className="px-4 py-2">{book?.user.email}</td>
-                    <td className="px-4 py-2">{book.price}</td>
+                    <td className="px-4 py-2">&#8377;{book.price}</td>
                     <td className="px-4 py-2">{formatDate(book.dueDate)}</td>
                     <td className="px-4 py-2">
                       {formatDateAndTime(book.createdAt)}

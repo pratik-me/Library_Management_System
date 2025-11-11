@@ -1,8 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../layout/Header";
+import { fetchAllUsers } from "../store/slices/userSlice";
 
 const Users = () => {
+  const dispatch = useDispatch();
   const {users} = useSelector(state => state.user);
 
   const formatDate = (timeStamp) => {
@@ -13,6 +15,10 @@ const Users = () => {
     const result = `${formattedDate} ${formattedTime}`;
     return result;
   }
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
   return (
     <>
       <main className="relative flex-1 p-6 pt-28">
