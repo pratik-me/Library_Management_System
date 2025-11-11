@@ -26,7 +26,6 @@ const App = () => {
     }
     if(isAuthenticated && user?.role === "User") {
       dispatch(fetchUserBorrowedBooks());
-      dispatch(fetchAllBorrowedBooks());
     }
   }, [isAuthenticated])
 
